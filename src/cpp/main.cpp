@@ -2,7 +2,7 @@
 
 #include "src/cpp/QtMultimedia/QMediaContent/qmediacontent_wrap.h"
 #include "src/cpp/QtMultimedia/QMediaPlayer/qmediaplayer_wrap.h"
-#include "src/cpp/QtMultimedia/QMediaPlaylist/QMediaPlaylist_wrap.h"
+#include "src/cpp/QtMultimedia/QMediaPlaylist/qmediaplaylist_wrap.h"
 #include "src/cpp/QtMultimediaWidgets/QVideoWidget/qvideowidget_wrap.h"
 
 Napi::Object Main(Napi::Env env, Napi::Object exports) {

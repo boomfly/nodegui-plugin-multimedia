@@ -34,6 +34,12 @@ QMediaContentWrap::QMediaContentWrap(const Napi::CallbackInfo& info)
   this->rawData = extrautils::configureComponent(this->getInternalInstance());
 }
 
+// QMediaContentWrap::QMediaContentWrap(const QMediaContent &other)
+//     : Napi::ObjectWrap<QMediaContentWrap>() {
+//   this->instance = std::make_unique<QMediaContent>(other);
+//   this->rawData = extrautils::configureComponent(this->getInternalInstance());
+// }
+
 QMediaContentWrap::~QMediaContentWrap() { this->instance.reset(); }
 
 QMediaContent* QMediaContentWrap::getInternalInstance() {

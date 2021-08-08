@@ -8,7 +8,7 @@ const win = new QMainWindow();
 const centralWidget = new QWidget(win);
 const rootLayout = new FlexLayout();
 centralWidget.setLayout(rootLayout);
-const mcontent = new QMediaContent();
+// const mcontent = new QMediaContent();
 
 const label = new QLabel();
 label.setObjectName('mylabel');
@@ -17,29 +17,35 @@ label.setText('Hello');
 rootLayout.addWidget(label);
 
 const playlist = new QMediaPlaylist();
-playlist.addMedia(QUrl.fromLocalFile("file:///Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
+playlist.addMedia(QUrl.fromLocalFile("/Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
 playlist.setCurrentIndex(1);
 
-const player = new QMediaPlayer(centralWidget);
+const player = new QMediaPlayer();
 player.addEventListener("error", (e: any) => {
-  console.log(e)
+  console.log('player error', e)
 });
-// player.setMedia(QUrl.fromLocalFile("file:///Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
-player.setPlaylist(playlist);
+player.addEventListener("mediaStatusChanged", (e: any) => {
+  console.log('player mediaStatusChanged', e)
+});
+player.setMedia(new QUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
+// player.setPlaylist(playlist);
 
-const videoWidget = new QVideoWidget(centralWidget);
+const videoWidget = new QVideoWidget();
 player.setVideoOutput(videoWidget);
 
 videoWidget.addEventListener("error", (e: any) => {
-  console.log(e)
+  console.log('videoWidget error', e)
 });
 
 rootLayout.addWidget(videoWidget);
 
-console.log("isNull", mcontent.isNull());
-win.setCentralWidget(centralWidget);
-videoWidget.show();
+// console.log("isNull", mcontent.isNull());
+win.setCentralWidget(videoWidget);
+// videoWidget.show();
+
+setTimeout(() => {
+  player.play();
+}, 2000);
 win.show();
-player.play();
 
 (global as any).win = win; // To prevent win from being garbage collected.

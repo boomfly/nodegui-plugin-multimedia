@@ -1,4 +1,4 @@
-import addon from "./utils/addon";
+import addon from "../utils/addon";
 import {
   NativeElement,
   Component,

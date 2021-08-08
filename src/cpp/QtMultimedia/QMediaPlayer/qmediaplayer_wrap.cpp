@@ -10,7 +10,7 @@
 #include "nodegui/QtCore/QUrl/qurl_wrap.h"
 #include "QtWidgets/QWidget/qwidget_wrap.h"
 #include "src/cpp/QtMultimediaWidgets/QVideoWidget/qvideowidget_wrap.h"
-#include "src/cpp/QtMultimedia/QMediaPlaylist/QMediaPlaylist_wrap.h"
+#include "src/cpp/QtMultimedia/QMediaPlaylist/qmediaplaylist_wrap.h"
 
 Napi::FunctionReference QMediaPlayerWrap::constructor;
 

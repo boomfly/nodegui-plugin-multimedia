@@ -47,10 +47,16 @@ QVideoWidgetWrap::QVideoWidgetWrap(const Napi::CallbackInfo& info)
     Napi::TypeError::New(env, "Wrong number of arguments")
       .ThrowAsJavaScriptException();
   }
-  auto flexNode = this->getInternalInstance()->getFlexNode();
-  YGNodeSetNodeType(flexNode, YGNodeType::YGNodeTypeText);
-  this->rawData =
-    extrautils::configureQWidget(this->getInternalInstance(), flexNode, true);
+  // auto flexNode = this->getInternalInstance()->getFlexNode();
+  // YGNodeSetNodeType(flexNode, YGNodeType::YGNodeTypeDefault);
+  // this->rawData =
+  //   extrautils::configureQWidget(this->getInternalInstance(), flexNode, true);
+
+  this->rawData = extrautils::configureQWidget(
+    this->getInternalInstance(),
+    this->getInternalInstance()->getFlexNode(),
+    false
+  );
 }
 
 QVideoWidgetWrap::~QVideoWidgetWrap() { extrautils::safeDelete(this->instance); }

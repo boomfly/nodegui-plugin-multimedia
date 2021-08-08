@@ -66,16 +66,16 @@
 #endif  // QMEDIAOBJECT_WRAPPED_METHODS_DECLARATION
 
 #ifndef QMEDIAOBJECT_WRAPPED_METHODS_EXPORT_DEFINE
-#define QMEDIAOBJECT_WRAPPED_METHODS_EXPORT_DEFINE(WidgetWrapName)             \
-                                                                               \
-  QOBJECT_WRAPPED_METHODS_EXPORT_DEFINE(WidgetWrapName)                        \
-  InstanceMethod("availableMetaData", &WidgetWrapName::availableMetaData),     \
-      InstanceMethod("isMetaDataAvailable",                                    \
-                     &WidgetWrapName::isMetaDataAvailable),                    \
-      InstanceMethod("metaData", &WidgetWrapName::metaData),                   \
-      InstanceMethod("notifyInterval", &WidgetWrapName::notifyInterval),       \
-      InstanceMethod("setNotifyInterval", &WidgetWrapName::setNotifyInterval), \
-      InstanceMethod("unbind", &WidgetWrapName::unbind),
+#define QMEDIAOBJECT_WRAPPED_METHODS_EXPORT_DEFINE(WidgetWrapName)              \
+                                                                                \
+  QOBJECT_WRAPPED_METHODS_EXPORT_DEFINE(WidgetWrapName)                         \
+  InstanceMethod("availableMetaData", &WidgetWrapName::availableMetaData),      \
+  InstanceMethod("isMetaDataAvailable",                                         \
+    &WidgetWrapName::isMetaDataAvailable),                                      \
+  InstanceMethod("metaData", &WidgetWrapName::metaData),                        \
+  InstanceMethod("notifyInterval", &WidgetWrapName::notifyInterval),            \
+  InstanceMethod("setNotifyInterval", &WidgetWrapName::setNotifyInterval),      \
+  InstanceMethod("unbind", &WidgetWrapName::unbind),
 
 #endif  // QMEDIAOBJECT_WRAPPED_METHODS_EXPORT_DEFINE
 

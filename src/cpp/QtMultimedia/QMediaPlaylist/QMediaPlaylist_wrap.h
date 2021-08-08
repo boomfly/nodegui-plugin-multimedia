@@ -4,7 +4,7 @@
 #include <QMediaPlaylist>
 #include <QPointer>
 
-#include "NMediaPlaylist.hpp"
+#include "nmediaplaylist.hpp"
 #include "QtCore/QObject/qobject_macro.h"
 #include "nodegui/Extras/Utils/nutils.h"
 

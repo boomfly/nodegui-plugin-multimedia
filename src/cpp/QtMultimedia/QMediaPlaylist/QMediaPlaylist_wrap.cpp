@@ -1,4 +1,4 @@
-#include "QMediaPlaylist_wrap.h"
+#include "qmediaplaylist_wrap.h"
 
 #include <napi.h>
 

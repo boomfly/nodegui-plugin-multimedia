@@ -21,8 +21,8 @@ add_library(${PLUGIN_ADDON_NAME} SHARED
     "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimedia/QMediaContent/qmediacontent_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimedia/QMediaPlayer/qmediaplayer_wrap.cpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimedia/QMediaPlayer/nmediaplayer.hpp"
-    "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimedia/QMediaPlaylist/NMediaPlaylist.hpp"
-    "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimedia/QMediaPlaylist/QMediaPlaylist_wrap.cpp"
+    "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimedia/QMediaPlaylist/nmediaplaylist.hpp"
+    "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimedia/QMediaPlaylist/qmediaplaylist_wrap.cpp"
 
     "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimediaWidgets/QVideoWidget/nvideowidget.hpp"
     "${PROJECT_SOURCE_DIR}/src/cpp/QtMultimediaWidgets/QVideoWidget/qvideowidget_wrap.cpp"
