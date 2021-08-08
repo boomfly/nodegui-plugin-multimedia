@@ -23,4 +23,6 @@ class DLL_EXPORT QMediaPlayerWrap : public Napi::ObjectWrap<QMediaPlayerWrap> {
   // Wrapped methods
   Napi::Value play(const Napi::CallbackInfo& info);
   Napi::Value setMedia(const Napi::CallbackInfo& info);
+  Napi::Value setPlaylist(const Napi::CallbackInfo& info);
+  Napi::Value setVideoOutput(const Napi::CallbackInfo& info);
 };

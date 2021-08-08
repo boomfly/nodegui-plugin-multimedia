@@ -12,5 +12,6 @@ macro(AddQtMultimediaSupport addonName)
 
     set(Qt5_DIR ${QT_CMAKE_HOME_DIR}) 
     find_package(Qt5 REQUIRED COMPONENTS Multimedia)
+    find_package(Qt5 REQUIRED COMPONENTS MultimediaWidgets)
     
 endmacro(AddQtMultimediaSupport addonName)

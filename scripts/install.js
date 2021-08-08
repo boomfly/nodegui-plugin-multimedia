@@ -14,7 +14,7 @@ const checkIfExists = fullPath => {
   return () => fs.existsSync(fullPath);
 };
 
-function getMiniQtWebviewArtifacts() {
+function getQtMultimediaArtifacts() {
   if (miniQt.version !== "5.14.1") {
     throw new Error(
       `Unsupported miniqt version ${miniQt.version}. Please raise an issue ticket on the plugin repo. This plugin only supports miniQt version 5.14.1, the author of the plugin will need to update the download links.`
@@ -77,12 +77,12 @@ function getMiniQtWebviewArtifacts() {
 }
 
 async function setupQt() {
-  const webviewArtifacts = getMiniQtWebviewArtifacts();
+  const webviewArtifacts = getQtMultimediaArtifacts();
   return Promise.all(
     webviewArtifacts.artifacts.map(async artifact =>
       setupArtifact({
         outDir: miniQt.setupDir,
-        id: "nodegui-mini-qtwebview", //cache-id
+        id: "nodegui-qtmultimedia", //cache-id
         displayName: `${artifact.name} for Minimal Qt: ${miniQt.version} installation`,
         downloadLink: artifact.link,
         skipSetup: artifact.skipSetup

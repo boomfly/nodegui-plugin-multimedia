@@ -13,16 +13,15 @@
   "author": "Andrés Rodríguez",
   "license": "MIT",
   "peerDependencies": {
-    "@nodegui/nodegui": ">=0.15.0"
+    "@nodegui/nodegui": "*"
   },
   "dependencies": {
-    "@nodegui/artifact-installer": "^1.1.0",
     "cmake-js": "^5.3.2",
     "cross-env": "^6.0.3",
     "node-addon-api": "^2.0.0"
   },
   "devDependencies": {
-    "@nodegui/nodegui": "^0.15.3",
+    "@nodegui/nodegui": "^0.35.0",
     "@types/node": "^13.1.6",
     "typescript": "^3.7.3"
   }
