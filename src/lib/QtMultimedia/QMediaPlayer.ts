@@ -10,6 +10,7 @@ import {
 } from "@nodegui/nodegui";
 import { QVideoWidget } from "../QtMultimediaWidgets/QVideoWidget";
 import { QMediaPlaylist } from "../QtMultimedia/QMediaPlaylist";
+import { QMediaContent } from "./QMediaContent";
 
 /**
  
@@ -92,7 +93,7 @@ export class QMediaPlayer extends NodeObject<any> {
     return this.native.setPlaylist(playlist.native);
   }
 
-  setMedia(url: QUrl): void {
+  setMedia(url: QUrl | QMediaContent): void {
     return this.native.setMedia(url.native);
   }
 

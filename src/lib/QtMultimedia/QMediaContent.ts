@@ -27,15 +27,19 @@ export class QMediaContent extends Component {
   constructor();
   // constructor(request: QNetworkRequest);
   constructor(playlist: QMediaPlaylist, contentUrl: QUrl, takeOwnership: boolean);
-  constructor(url?: QUrl);
+  constructor(other: QMediaContent);
+  constructor(url: QUrl);
   constructor(...params: any[]) {
     super();
     if (params[0] instanceof QUrl) {
-      console.log('params[0] instanceof QUrl', params);
-      this.native = new addon.QMediaContent(params[0]);
+      console.log('params[0] instanceof QUrl');
+      this.native = new addon.QMediaContent(params[0].native);
     } else if (params[0] instanceof QMediaPlaylist) {
       const [playlist, contentUrl, takeOwnership] = params;
-      this.native = new addon.QMediaContent(playlist, contentUrl, takeOwnership);
+      this.native = new addon.QMediaContent(playlist.native, contentUrl.native, takeOwnership);
+    } else if (params[0] instanceof QMediaContent) {
+      const [other] = params;
+      this.native = new addon.QMediaContent(other.native);
     } else if (params.length > 0) {
       throw new Error('Wrong constructor params');
     } else {

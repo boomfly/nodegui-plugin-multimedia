@@ -19,20 +19,36 @@ const win = new QMainWindow();
 // const playlist = new QMediaPlaylist();
 // playlist.addMedia(QUrl.fromLocalFile("/Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
 // playlist.setCurrentIndex(1);
-// const remoteUrl = new QUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
+const remoteUrl = new QUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
 // console.log(remoteUrl.toString());
-// const mediaContent = new QMediaContent();
+const mediaContent = new QMediaContent(remoteUrl);
+
+const mediaContent2 = new QMediaContent(mediaContent);
+
+// console.log("isNull", mediaContent.isNull());
 
 const player = new QMediaPlayer();
 player.addEventListener("error", (e: any) => {
-  console.log('player error', e)
+  console.log('player error', e);
 });
 player.addEventListener("mediaStatusChanged", (e: any) => {
-  console.log('player mediaStatusChanged', e)
+  console.log('player mediaStatusChanged', e);
 });
+player.addEventListener("currentMediaChanged", (e: any) => {
+  console.log('player currentMediaChanged', e);
+  // if (e) {
+  //   try {
+  //     console.log('player currentMediaChanged', e.isNull());
+  //   } catch (e) {
+  //     console.error(e)
+  //   }
+  // }
+});
+
 // player.setMedia(QUrl.fromLocalFile("/Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
-player.setMedia(new QUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
+// player.setMedia(new QUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
 // player.setPlaylist(playlist);
+player.setMedia(mediaContent2);
 
 const videoWidget = new QVideoWidget();
 player.setVideoOutput(videoWidget);
@@ -43,7 +59,6 @@ videoWidget.addEventListener("error", (e: any) => {
 
 // rootLayout.addWidget(videoWidget);
 
-// console.log("isNull", mcontent.isNull());
 win.setCentralWidget(videoWidget);
 // videoWidget.show();
 

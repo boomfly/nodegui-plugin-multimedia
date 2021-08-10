@@ -1,5 +1,5 @@
 {
-  "name": "nodegui-plugin-qtmultimedia",
+  "name": "nodegui-plugin-multimedia",
   "version": "1.0.0",
   "description": "QtMultimedia plugin for NodeGui",
   "main": "dist/index.js",

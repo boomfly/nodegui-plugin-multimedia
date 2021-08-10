@@ -32,20 +32,41 @@ QMediaContentWrap::QMediaContentWrap(const Napi::CallbackInfo& info)
   if (info.Length() == 0) {
     this->instance = std::make_unique<QMediaContent>();
   } else if (info.Length() == 1) {
+    Napi::Object napiObject = info[0].As<Napi::Object>();
+
     if (info[0].IsObject()) {
-      printf("IsExternal true\n");
-      Napi::Object objectNapi = info[0].ToObject();
-      Napi::Object napiObj = info[0].As<Napi::Object>();
-      printf("QMediaContentWrap constructor\n");
-      // QUrlWrap* urlWrap = Napi::ObjectWrap<QUrlWrap>::Unwrap(napiObj);
-      QUrl* urlWrap = Napi::ObjectWrap<QUrl>::Unwrap(napiObj);
-      printf("QMediaContentWrap constructor unwraped\n");
-      // this->instance = std::make_unique<QMediaContent>(*urlWrap->getInternalInstance());
-      // if (objectNapi.InstanceOf(QUrlWrap::constructor.Value())) {
-      //   printf("QUrlWrap install\n");
-      // // } else if (Napi::Object::InstanceOf(QUrl)) {
-      // //   printf("QUrl install\n");
+      printf("QMediaContentWrap: IsObject true\n");
+      // Napi::Array napiArray = napiObject.GetPropertyNames();
+      // for (int i = 0; i < napiArray.Length(); i++) {
+      //   Napi::Value val = napiArray[i];
+      //   printf("QMediaContentWrap constructor props: %s \n", val.ToString().Utf8Value().c_str());
       // }
+      // Check instanceof wrappers
+      if (napiObject.InstanceOf(QUrlWrap::constructor.Value())) {
+        printf("QMediaContentWrap: QUrlWrap instance\n");
+        QUrlWrap* urlWrap = Napi::ObjectWrap<QUrlWrap>::Unwrap(napiObject);
+        this->instance = std::make_unique<QMediaContent>(*urlWrap->getInternalInstance());
+      } else if (napiObject.InstanceOf(QMediaContentWrap::constructor.Value())) {
+        printf("QMediaContentWrap: QMediaContentWrap instance\n");
+        QMediaContentWrap* mediaContentWrap =
+          Napi::ObjectWrap<QMediaContentWrap>::Unwrap(napiObject);
+        this->instance = std::make_unique<QMediaContent>(
+          *mediaContentWrap->getInternalInstance()
+        );
+      }
+    } else if (info[0].IsExternal()) {
+      printf("QMediaContentWrap: IsExternal true\n");
+      if (napiObject.InstanceOf(QMediaContentWrap::constructor.Value())) {
+        printf("QMediaContentWrap: QMediaContentWrap instance\n");
+        QMediaContentWrap* mediaContentWrap =
+          Napi::ObjectWrap<QMediaContentWrap>::Unwrap(napiObject);
+        this->instance = std::make_unique<QMediaContent>(
+          *mediaContentWrap->getInternalInstance()
+        );
+      }
+    } else {
+      Napi::TypeError::New(env, "Wrong arguments")
+        .ThrowAsJavaScriptException();
     }
   } else {
     Napi::TypeError::New(env, "Wrong number of arguments")
