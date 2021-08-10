@@ -68,9 +68,14 @@ Napi::Value QMediaPlayerWrap::setMedia(const Napi::CallbackInfo& info) {
     Napi::TypeError::New(env, "Wrong number of arguments")
       .ThrowAsJavaScriptException();
   }
-  auto napiObj = info[0].As<Napi::Object>().Get("native").As<Napi::Object>();
-  auto qUrlWrap = Napi::ObjectWrap<QUrlWrap>::Unwrap(napiObj);
-  this->instance->setMedia(*qUrlWrap->getInternalInstance());
+  Napi::Object napiObj = info[0].As<Napi::Object>();
+  // printf("Hello World");
+  QUrlWrap* urlWrap = Napi::ObjectWrap<QUrlWrap>::Unwrap(napiObj);
+  // printf("Hello World 222");
+  // QUrl* url = urlWrap->getInternalInstance();
+  // printf("%s", url->toString().toStdString().c_str());
+  this->instance->setMedia(*urlWrap->getInternalInstance());
+  printf("Hello World 333\n");
   return env.Undefined();
 }
 
@@ -81,9 +86,9 @@ Napi::Value QMediaPlayerWrap::setPlaylist(const Napi::CallbackInfo& info) {
     Napi::TypeError::New(env, "Wrong number of arguments")
       .ThrowAsJavaScriptException();
   }
-  Napi::Object object = info[0].As<Napi::Object>();
+  Napi::Object objectNapi = info[0].As<Napi::Object>();
   QMediaPlaylistWrap* objectWrap =
-    Napi::ObjectWrap<QMediaPlaylistWrap>::Unwrap(object);
+    Napi::ObjectWrap<QMediaPlaylistWrap>::Unwrap(objectNapi);
   this->instance->setPlaylist(objectWrap->getInternalInstance());
   return env.Undefined();
 }
@@ -93,7 +98,7 @@ Napi::Value QMediaPlayerWrap::setVideoOutput(const Napi::CallbackInfo& info) {
   Napi::HandleScope scope(env);
   if (info.Length() == 0) {
     Napi::TypeError::New(env, "Wrong number of arguments")
-        .ThrowAsJavaScriptException();
+      .ThrowAsJavaScriptException();
   }
   auto napiObj = info[0].As<Napi::Object>().Get("native").As<Napi::Object>();
   auto qVideoWidgetWrap = Napi::ObjectWrap<QVideoWidgetWrap>::Unwrap(napiObj);

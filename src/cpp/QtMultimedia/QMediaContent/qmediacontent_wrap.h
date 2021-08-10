@@ -16,9 +16,10 @@ class DLL_EXPORT QMediaContentWrap
   static Napi::FunctionReference constructor;
   static Napi::Object init(Napi::Env env, Napi::Object exports);
   QMediaContentWrap(const Napi::CallbackInfo& info);
-  // QMediaContentWrap(const QMediaContent &other);
   ~QMediaContentWrap();
   QMediaContent* getInternalInstance();
   // Wrapped methods
   Napi::Value isNull(const Napi::CallbackInfo& info);
+  Napi::Value playlist(const Napi::CallbackInfo& info);
+  // Napi::Value request(const Napi::CallbackInfo& info);
 };

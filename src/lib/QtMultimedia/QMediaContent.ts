@@ -2,7 +2,9 @@ import addon from "../utils/addon";
 import {
   NativeElement,
   Component,
+  QUrl
 } from "@nodegui/nodegui";
+import { QMediaPlaylist } from "./QMediaPlaylist";
 
 /**
  
@@ -22,9 +24,23 @@ const mediaContent = new QMediaContent();
  */
 export class QMediaContent extends Component {
   native: NativeElement;
-  constructor() {
+  constructor();
+  // constructor(request: QNetworkRequest);
+  constructor(playlist: QMediaPlaylist, contentUrl: QUrl, takeOwnership: boolean);
+  constructor(url?: QUrl);
+  constructor(...params: any[]) {
     super();
-    this.native = new addon.QMediaContent();
+    if (params[0] instanceof QUrl) {
+      console.log('params[0] instanceof QUrl', params);
+      this.native = new addon.QMediaContent(params[0]);
+    } else if (params[0] instanceof QMediaPlaylist) {
+      const [playlist, contentUrl, takeOwnership] = params;
+      this.native = new addon.QMediaContent(playlist, contentUrl, takeOwnership);
+    } else if (params.length > 0) {
+      throw new Error('Wrong constructor params');
+    } else {
+      this.native = new addon.QMediaContent();
+    }
   }
   isNull(): boolean {
     return this.native.isNull();

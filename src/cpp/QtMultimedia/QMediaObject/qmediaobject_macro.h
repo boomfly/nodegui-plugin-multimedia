@@ -89,7 +89,7 @@
                      this->emitOnNode.Call(                                    \
                          {Napi::String::New(env, "notifyIntervalChanged"),     \
                           Napi::Number::New(env, milliSeconds)});              \
-                   });                                                         \
+                   });                                                         
   /*QObject::connect(this, &QMediaObject::metaDataChanged, [=]() {             \
     Napi::Env env = this->emitOnNode.Env();                                    \
     Napi::HandleScope scope(env);                                              \

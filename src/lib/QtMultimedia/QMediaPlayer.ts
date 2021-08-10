@@ -93,7 +93,7 @@ export class QMediaPlayer extends NodeObject<any> {
   }
 
   setMedia(url: QUrl): void {
-    return this.native.setMedia(url);
+    return this.native.setMedia(url.native);
   }
 
   setVideoOutput(videoWidget: QVideoWidget) {

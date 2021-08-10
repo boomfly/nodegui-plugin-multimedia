@@ -43,17 +43,19 @@ class DLL_EXPORT NMediaPlayer : public QMediaPlayer, public EventWidget {
         Napi::Number::From(env, percentFilled)
       });
     });
-    // QObject::connect(this, &QMediaPlayer::currentMediaChanged, [=](QMediaContent &media) {
-    //   Napi::Env env = this->emitOnNode.Env();
-    //   Napi::HandleScope scope(env);
-    //   auto instance = QMediaContentWrap::constructor.New({
-    //     Napi::External<QMediaContent>::New(env, item)
-    //   });
-    //   this->emitOnNode.Call({
-    //     Napi::String::New(env, "currentMediaChanged"),
-    //     instance
-    //   });
-    // });
+    QObject::connect(this, &QMediaPlayer::currentMediaChanged, [=](const QMediaContent &media) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+
+      Napi::Value mediaWrap = QMediaContentWrap::constructor.New({
+        Napi::External<QMediaContent>::New(env, new QMediaContent(media))
+      });
+
+      this->emitOnNode.Call({
+        Napi::String::New(env, "currentMediaChanged"),
+        mediaWrap
+      });
+    });
     QObject::connect(this, &QMediaPlayer::customAudioRoleChanged, [=](const QString &role) {
       Napi::Env env = this->emitOnNode.Env();
       Napi::HandleScope scope(env);
@@ -82,14 +84,19 @@ class DLL_EXPORT NMediaPlayer : public QMediaPlayer, public EventWidget {
         Napi::Number::From(env, static_cast<int>(error))
       });
     });
-    // QObject::connect(this, &QMediaPlayer::mediaChanged, [=](QMediaContent &media) {
-    //   Napi::Env env = this->emitOnNode.Env();
-    //   Napi::HandleScope scope(env);
-    //   this->emitOnNode.Call({
-    //     Napi::String::New(env, "mediaChanged"),
-    //     Napi::Object::From(env, media)
-    //   });
-    // });
+    QObject::connect(this, &QMediaPlayer::mediaChanged, [=](const QMediaContent &media) {
+      Napi::Env env = this->emitOnNode.Env();
+      Napi::HandleScope scope(env);
+
+      Napi::Value mediaWrap = QMediaContentWrap::constructor.New({
+        Napi::External<QMediaContent>::New(env, new QMediaContent(media))
+      });
+
+      this->emitOnNode.Call({
+        Napi::String::New(env, "mediaChanged"),
+        mediaWrap
+      });
+    });
     QObject::connect(
       this,
       &QMediaPlayer::mediaStatusChanged,

@@ -5,20 +5,23 @@ import { QMediaPlaylist } from "./lib/QtMultimedia/QMediaPlaylist";
 import { QVideoWidget } from "./lib/QtMultimediaWidgets/QVideoWidget";
 
 const win = new QMainWindow();
-const centralWidget = new QWidget(win);
-const rootLayout = new FlexLayout();
-centralWidget.setLayout(rootLayout);
+// const centralWidget = new QWidget(win);
+// const rootLayout = new FlexLayout();
+// centralWidget.setLayout(rootLayout);
 // const mcontent = new QMediaContent();
 
-const label = new QLabel();
-label.setObjectName('mylabel');
-label.setText('Hello');
+// const label = new QLabel();
+// label.setObjectName('mylabel');
+// label.setText('Hello');
 
-rootLayout.addWidget(label);
+// rootLayout.addWidget(label);
 
-const playlist = new QMediaPlaylist();
-playlist.addMedia(QUrl.fromLocalFile("/Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
-playlist.setCurrentIndex(1);
+// const playlist = new QMediaPlaylist();
+// playlist.addMedia(QUrl.fromLocalFile("/Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
+// playlist.setCurrentIndex(1);
+// const remoteUrl = new QUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
+// console.log(remoteUrl.toString());
+// const mediaContent = new QMediaContent();
 
 const player = new QMediaPlayer();
 player.addEventListener("error", (e: any) => {
@@ -27,6 +30,7 @@ player.addEventListener("error", (e: any) => {
 player.addEventListener("mediaStatusChanged", (e: any) => {
   console.log('player mediaStatusChanged', e)
 });
+// player.setMedia(QUrl.fromLocalFile("/Users/boomfly/Downloads/Big_Buck_Bunny_720_10s_5MB.mp4"));
 player.setMedia(new QUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
 // player.setPlaylist(playlist);
 
@@ -37,7 +41,7 @@ videoWidget.addEventListener("error", (e: any) => {
   console.log('videoWidget error', e)
 });
 
-rootLayout.addWidget(videoWidget);
+// rootLayout.addWidget(videoWidget);
 
 // console.log("isNull", mcontent.isNull());
 win.setCentralWidget(videoWidget);
